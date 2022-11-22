@@ -9,14 +9,14 @@ const Navbar = () => {
         
  <div className={styled.flex}>
 
- {/* <div className={styled.left}>
+ <div className={styled.left}>
       <Link to="Home" hashSpy={true}
               spy={true}
               smooth={true}
               delay={100}
               duration={500}
               className={styled.left}>Home</Link>
-      </div> */}
+      </div>
       
       <div className={styled.left}>
       <Link to="intro" hashSpy={true}
