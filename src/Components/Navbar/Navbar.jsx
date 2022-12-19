@@ -1,22 +1,39 @@
 import React from 'react'
 import styled from "./Navbar.module.css"
 import {Link } from "react-scroll";
-
+import logo from "../files/IshanMehta_logo.png"
 
 const Navbar = () => {
+        const onButtonClick = () => {
+                // using Java Script method to get PDF file
+                fetch('Ishan_Mehta_Resume.pdf').then(response => {
+                    response.blob().then(blob => {
+                        // Creating new object of PDF file
+                        const fileURL = window.URL.createObjectURL(blob);
+                        // Setting various property values
+                        let alink = document.createElement('a');
+                        alink.href = fileURL;
+                        alink.download = 'Ishan_Mehta_Resume.pdf';
+                        alink.click();
+                    })
+                })
+            } 
   return (
     <div className={styled.main}>
         
  <div className={styled.flex}>
 
- {/* <div className={styled.left}>
+ <div className={styled.left}>
       <Link to="Home" hashSpy={true}
               spy={true}
               smooth={true}
               delay={100}
               duration={500}
-              className={styled.left}>Home</Link>
-      </div> */}
+              className={styled.left}>
+
+                <img className={styled.logo} src={logo}></img>
+              </Link>
+      </div>
       
       <div className={styled.left}>
       <Link to="intro" hashSpy={true}
@@ -56,7 +73,10 @@ const Navbar = () => {
               smooth={true}
               delay={100}
               duration={500}
-              className={styled.left}>Resume</Link>
+              onClick={onButtonClick}
+              className={styled.left}>
+               Resume
+                </Link>
       </div>
      
     </div>

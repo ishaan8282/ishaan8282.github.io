@@ -8,6 +8,7 @@ import Project from './Project/Project'
 import Resume from './Resume/Resume'
 import SideBar from './Sidebar/SideBar'
 import Skills from './Skills/Skills'
+import Calendar from "./GithubCalendar/Calendar"
 
 const Main = () => {
   return (
@@ -21,7 +22,9 @@ const Main = () => {
       <Project/>
       <Resume/>
       <Contact/>
+      <Calendar/>
       <Email/>
+      
     </>
   )
 }

@@ -27,7 +27,7 @@ const Resume = () => {
       <a className={styled.img} href="https://drive.google.com/file/d/1W67NquTZ7YylTpn5oqLt9n6EKQZIMSwD/view?usp=share_link" download> <Center> <button onClick={onButtonClick} className={styled.btn}>See My Resume</button> </Center>  </a>
       </div> */}
        <h1 className={styled.mid} > Resume </h1>
-      <Center><a href="https://drive.google.com/file/d/1W67NquTZ7YylTpn5oqLt9n6EKQZIMSwD/view?usp=share_link" download><button className={styled.Resumebtn} onClick={onButtonClick}> See my Resume </button></a> </Center> 
+      <Center><a href="https://drive.google.com/file/d/1W67NquTZ7YylTpn5oqLt9n6EKQZIMSwD/view?usp=share_link"><button className={styled.Resumebtn}> See my Resume </button></a> </Center> 
     </div>
   )
 }
