@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/static/css/main.190158d9.css",
-    "main.js": "/static/js/main.ed6762ca.js",
+    "main.css": "/static/css/main.36d18c3a.css",
+    "main.js": "/static/js/main.fa210273.js",
     "static/js/787.1ed0c42c.chunk.js": "/static/js/787.1ed0c42c.chunk.js",
     "static/media/Appletv.jpg": "/static/media/Appletv.66c3072ae57b9f59ab4f.jpg",
     "static/media/apollo_Banner.jpg": "/static/media/apollo_Banner.ef4a7fd735365d1520e7.jpg",
-    "static/media/Image.png": "/static/media/Image.3fe7c35a0d93b28124c7.png",
     "static/media/Airgarage.jpg": "/static/media/Airgarage.534e3256fc233e38cd9d.jpg",
     "static/media/Time Tracking.jpg": "/static/media/Time Tracking.90d13af34adea414efac.jpg",
+    "static/media/ProfPic.jpg": "/static/media/ProfPic.e3a62a0d8037620082ea.jpg",
     "index.html": "/index.html",
-    "main.190158d9.css.map": "/static/css/main.190158d9.css.map",
-    "main.ed6762ca.js.map": "/static/js/main.ed6762ca.js.map",
+    "main.36d18c3a.css.map": "/static/css/main.36d18c3a.css.map",
+    "main.fa210273.js.map": "/static/js/main.fa210273.js.map",
     "787.1ed0c42c.chunk.js.map": "/static/js/787.1ed0c42c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.190158d9.css",
-    "static/js/main.ed6762ca.js"
+    "static/css/main.36d18c3a.css",
+    "static/js/main.fa210273.js"
   ]
 }
