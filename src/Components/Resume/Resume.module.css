@@ -1,17 +1,37 @@
+.resume{
+    /* border: 1px solid red; */
+    width: 80%;
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding: 20px;
+}
+
 .mid
 {
+    margin-top: 2px;
     text-align: center;
-    margin-top: 100px;
-    /* border: 1px solid red; */
 }
 .flex
 {
     display: flex;
     margin-top: 50px;
 }
+.Resumebtn{
+    border: 1px solid #d1b561;
+    color:#d1b561;
+    border-radius: 10px;
+    background-color: rgba(0,0,0,255);
+    width:200px;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px;
+}
 .btn
 {
-    margin-left:45%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height:60px;
     width:200px;
     border: 1px solid #d1b561;
@@ -19,8 +39,6 @@
     border-radius: 10px;
     background-color: rgba(0,0,0,255);
     font-size: 18px;
-    margin-top:15%;
-    margin-bottom: 10%;
 }
 .img
 {
@@ -47,7 +65,8 @@
     }
     .btn
     {
-        margin-top: 15px;
-        margin-left:23%;
+        
+        /* margin-top: 15px;
+        margin-left:23%; */
     }
   }
