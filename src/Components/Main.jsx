@@ -21,8 +21,8 @@ const Main = () => {
       <Skills/>
       <Project/>
       <Resume/>
-      <Contact/>
       <Calendar/>
+      <Contact/>
       <Email/>
       
     </>
