@@ -15,19 +15,29 @@ const Resume = () => {
             alink.click();
         })
     })
-} 
-  
+}
+
 
   return (
     <div id="resume" className={styled.resume}>
-       {/* <h1 className={styled.mid}>Resume</h1>   
+       {/* <h1 className={styled.mid}>Resume</h1>
       <div  className={styled.flex}>
-     
+
      <img className={styled.img} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQF01H2L8h62qzU9Fykx2hig89U0Q73-EwVug&usqp=CAU" alt="cv"/>
       <a className={styled.img} href="https://drive.google.com/file/d/1W67NquTZ7YylTpn5oqLt9n6EKQZIMSwD/view?usp=share_link" download> <Center> <button onClick={onButtonClick} className={styled.btn}>See My Resume</button> </Center>  </a>
       </div> */}
-       <h1 className={styled.mid} > Resume </h1>
-      <Center><a href="https://drive.google.com/file/d/1W67NquTZ7YylTpn5oqLt9n6EKQZIMSwD/view?usp=share_link"><button className={styled.Resumebtn}> See my Resume </button></a> </Center> 
+      <h1 className={styled.mid} > Resume </h1>
+      <Center>
+        <a
+          href="https://drive.google.com/file/d/15p0I77Hr3WQpuq2M3ti9TlxOFk_G6wYF/view?usp=sharing"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <button className={styled.Resumebtn}>
+            See my Resume
+          </button>
+        </a>
+      </Center>
     </div>
   )
 }
