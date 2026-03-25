@@ -7,7 +7,7 @@ function TypeWriter() {
       options={{
         strings: [
           "Full-Stack Developer",
-          "MERN Stack Developer",
+          "Laravel, Vue & React Developer",
         ],
         autoStart: true,
         loop: true,

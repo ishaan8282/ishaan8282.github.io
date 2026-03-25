@@ -138,6 +138,31 @@
   align-items: center;
 }
 
+.size {
+    position: relative;
+}
+
+.size[data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #000;
+    color: #fff;
+    padding: 4px 8px;
+    font-size: 12px;
+    border-radius: 4px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.size:hover[data-tooltip]::after {
+    opacity: 1;
+}
+
 @media (max-width: 900px) {
   .mid {
     margin-top: 60px;
