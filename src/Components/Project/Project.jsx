@@ -39,7 +39,7 @@ const Project = () => {
                 Close
               </button>
               <h1>Apollo-24/7-Project</h1>
-              
+
               <p>
               Apollo 24|7 is a single online platform where you have access to a wide range of services such as online pharmacy, online doctor consultations, and diagnostic lab tests at home.
               </p>
@@ -56,7 +56,7 @@ const Project = () => {
                 3. Cart Page. <br />
                 4. Payment Page. On payment page button like PAY RS and VERIFY AND PAY will be disabled untill you didn't fill detail. After that you can proceed further. <br />
               </p>
-             
+
             </Modal>
           </div>
           <h5>HTML || CSS || JavaScript || JSON-Server</h5>
@@ -118,7 +118,7 @@ users can enjoy watching TV shows, movies, and web series.
                 3. User info is stored in Local Storage. <br />
                 4. User can Watch specific season which are present in Database. <br />
               </p>
-              
+
             </Modal>
           </div>
           <h5>HTML || CSS || JavaScript</h5>
@@ -138,8 +138,8 @@ users can enjoy watching TV shows, movies, and web series.
             </a>
           </div>
         </div>
-      
-      
+
+
       </div>
 
 
@@ -180,7 +180,7 @@ users can enjoy watching TV shows, movies, and web series.
                 2. Home Page.
                 3. Find Parking Page. (Only UI)
               </p>
-             
+
             </Modal>
           </div>
           <h5>React || CSS || Chakra-UI</h5>
@@ -200,8 +200,8 @@ users can enjoy watching TV shows, movies, and web series.
             </a>
           </div>
         </div>
-      
-      
+
+
       </div>
 
 
@@ -217,7 +217,7 @@ users can enjoy watching TV shows, movies, and web series.
         </div>
         <div className={styled.right}>
           <h4 className={styled.color}>Featured</h4>
-          
+
           <h2>Tracking-Time</h2>
           <div className={styled.box}>
             <p>
@@ -228,7 +228,7 @@ users can enjoy watching TV shows, movies, and web series.
               </p>
             </p>
             <Modal className={styled.background} isOpen={isOpen4}>
-            
+
             <button onClick={() => setIsOpen4(false)} className={styled.btn}>
                 Close
               </button>
@@ -246,7 +246,7 @@ users can enjoy watching TV shows, movies, and web series.
                 2. Home Page.
                 3. Some other Pages like Integration, Blog. (Note : we have to run Json-Server)
               </p>
-              
+
             </Modal>
           </div>
           <h5>React || CSS || Chakra-UI</h5>
@@ -266,15 +266,15 @@ users can enjoy watching TV shows, movies, and web series.
             </a>
           </div>
         </div>
-      
-      
+
+
       </div>
-      
-      
-         
+
+
+
         </div>
-      
-   
+
+
   )
 }
 

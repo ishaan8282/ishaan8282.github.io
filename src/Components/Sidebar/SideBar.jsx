@@ -1,23 +1,33 @@
 import React from 'react'
-import { AiFillGithub,AiFillTwitterCircle,AiFillLinkedin,AiFillFacebook } from "react-icons/ai";
+import { AiFillGithub, AiFillLinkedin } from "react-icons/ai"
 import styled from './SideBar.module.css'
+
 const SideBar = () => {
   return (
     <div className={styled.fix}>
-          <a
-              className={styled.color3}
-              href="https://github.com/ishaan8282"
-            >
-              <AiFillGithub className={styled.color1}/><br/>
-            </a>
-            
-             <a
-              className={styled.color3}
-              href="https://www.linkedin.com/in/ishan-mehta-948a83222/"
-            >
-              <AiFillLinkedin className={styled.color}/><br/>
-            </a>    
-    
+      <a
+        className={styled.iconLink}
+        href="https://github.com/ishaan8282"
+        target="_blank"
+        rel="noreferrer"
+        aria-label="GitHub"
+      >
+        <AiFillGithub className={styled.icon} />
+      </a>
+
+      {/* thin divider between icons on mobile */}
+      <span className={styled.divider} />
+
+      <a
+        className={styled.iconLink}
+        href="https://www.linkedin.com/in/ishan-mehta-948a83222/"
+        target="_blank"
+        rel="noreferrer"
+        aria-label="LinkedIn"
+      >
+        <AiFillLinkedin className={styled.icon} />
+      </a>
+
     </div>
   )
 }

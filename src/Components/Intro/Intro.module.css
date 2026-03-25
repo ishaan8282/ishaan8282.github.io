@@ -1,53 +1,152 @@
-.color
-{
-    color:#d1b561;
-    margin-left: 15%;
-    margin-top:7%;
+.section {
+  padding-top: 140px;
+  padding-bottom: 80px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
 }
-.fontS{
-    margin-left: 15%;
-    font-size: 60px;
-    margin-top: -10px;
+
+.h1 {
+  margin: 0 0 48px 15%;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(209, 181, 97, 0.5);
 }
-.fontS2{
-    margin-left: 15%;
-    font-size: 60px;
-    margin-top: -50px;
+
+.color {
+  color: #d1b561;
+  margin: 0 0 12px 15%;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: 13px;
 }
-.left
-{
-    margin-left: 15%;
-    width:50%;
-    line-height: 30px;
-    margin-bottom: 70px;
+
+.fontS {
+  margin: 0 0 8px 15%;
+  font-size: 72px;
+  font-weight: 700;
+  line-height: 1.1;
+  background: linear-gradient(135deg, #ffffff 0%, #d1b561 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
-.btn
-{
-    margin-left: 15%;
-    height:60px;
-    width:200px;
-    padding:20px;
-    border: 1px solid #d1b561;
-    color:#d1b561;
-    border-radius: 10px;
-    background-color: rgba(0,0,0,255);
-    font-size: 18px;
-    margin-top:30px;
-    cursor: pointer
+
+.fontS2 {
+  margin: 0 0 28px 15%;
+  font-size: 72px;
+  font-weight: 700;
+  line-height: 1.1;
+  background: linear-gradient(135deg, #ffffff 0%, #d1b561 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
-.mid
-{
-    text-align: center;
+
+.left {
+  margin: 0 0 36px 15%;
+  width: 50%;
+  max-width: 600px;
+  line-height: 1.75;
+  color: #a0a0a0;
+  font-size: 18px;
+  font-weight: 300;
 }
-.h1
-{
-    margin-top: 110px;
-    margin-left: 15%;
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 15%;
+  height: 52px;
+  width: 200px;
+  padding: 0 28px;
+  border: 2px solid #d1b561;
+  color: #d1b561;
+  border-radius: 30px;
+  background-color: transparent;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
 }
+
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #d1b561;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+  z-index: 0;
+}
+
+.btn span {
+  position: relative;
+  z-index: 1;
+  transition: color 0.3s ease;
+}
+
+.btn:hover::before { transform: scaleX(1); }
+.btn:hover span    { color: #0a0a0a; }
+
+/* ── Tablet ── */
 @media (max-width: 900px) {
-    .fontS2{
-        margin-left: 15%;
-        font-size: 50px;
-        margin-top: -50px;
-    }
+  .fontS  { font-size: 52px; }
+  .fontS2 { font-size: 52px; }
+  .left   { font-size: 16px; width: 70%; }
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  /* Sidebar horizontal bar is rendered above this in the DOM,
+     so we only need a small top gap here */
+  .section {
+    padding-top: 32px;
+    min-height: unset;
+    justify-content: flex-start;
+  }
+
+  .h1 {
+    margin-left: 6%;
+    margin-bottom: 24px;
+  }
+
+  .color  { margin-left: 6%; }
+
+  .fontS {
+    font-size: 38px;
+    margin-left: 6%;
+  }
+
+  .fontS2 {
+    font-size: 30px;
+    margin-left: 6%;
+    margin-bottom: 20px;
+  }
+
+  .left {
+    margin-left: 6%;
+    width: 88%;
+    font-size: 15px;
+    margin-bottom: 28px;
+  }
+
+  .btn {
+    margin-left: 6%;
+    width: 180px;
+    height: 48px;
+    font-size: 13px;
+  }
 }

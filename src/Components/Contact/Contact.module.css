@@ -1,89 +1,148 @@
-.color
-{
-    background-color: rgba(0,0,0,255);
-    width:35%;
-    border:0px;
-    outline:none;
-    border-bottom: 1px solid grey;
-    margin-left: 15%;
-    height: 50px;
-    margin-top: 2%;
-    font-size: 18px;
-    font-weight: bold;
-    color:whitesmoke
+/* ── Section wrapper ── */
+.section {
+  padding: 80px 0 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.color1
-{
-    background-color: rgba(0,0,0,255);
-    width:35%;
-    border:0px;
-    outline:none;
-    border-bottom: 1px solid grey;
-    margin-left:5%;
-    height: 50px;
-    margin-top: 2%;
-    font-size: 18px;
-    font-weight: bold;
-    color:whitesmoke
+
+/* ── Single gold heading — matches Skills / Projects / Resume ── */
+.h1 {
+  text-align: center;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #d1b561;
+  margin-bottom: 52px;
 }
-.color2
-{
-    background-color: rgba(0,0,0,255);
-    width:75.5%;
-    border:0px;
-    outline:none;
-    border-bottom: 1px solid grey;
-    margin-left: 15%;
-    height: 50px;
-    margin-top: 2%;
-    font-size: 18px;
-    font-weight: bold;
-    color:whitesmoke
+
+/* ── Form card ── */
+.card {
+  width: 100%;
+  max-width: 860px;
+  padding: 0 24px;
+  box-sizing: border-box;
 }
-.color3
-{
-    background-color: rgba(0,0,0,255);
-    width:65.5%;
-    border:0px;
-    outline:none;
-    margin-left: 15%;
-    margin-top: 5%;
-    padding-bottom: 30px;
-    height: 200px;
-    font-size: 18px;
-    font-weight: bold;
-    color:whitesmoke
+
+/* ── Row: Full Name + Mobile Number side by side ── */
+.top {
+  display: flex;
+  gap: 28px;
+  margin-bottom: 0;
 }
-.h1
-{
-    text-align: center;
+
+.top .color,
+.top .color1 {
+  flex: 1;
+  min-width: 0;
 }
-.btn
-{
-    margin-left: 15%;
-    height:60px;
-    width:200px;
-    border: 1px solid #d1b561;
-    color:#d1b561;
-    border-radius: 10px;
-    background-color: rgba(0,0,0,255);
-    font-size: 18px;
-    margin-top: 3%;
-    margin-bottom: 10%;
+
+/* ── Shared input base ── */
+.color,
+.color1,
+.color2 {
+  background-color: transparent;
+  border: 0;
+  outline: none;
+  border-bottom: 1.5px solid rgba(255, 255, 255, 0.15);
+  height: 54px;
+  margin-top: 28px;
+  font-size: 15px;
+  font-weight: 400;
+  color: whitesmoke;
+  transition: border-color 0.3s ease;
+  padding: 0 4px;
+  width: 100%;
+  box-sizing: border-box;
+  display: block;
 }
-.top{
-    margin-top: 50px;
+
+.color:focus,
+.color1:focus,
+.color2:focus {
+  border-bottom-color: #d1b561;
+}
+
+.color::placeholder,
+.color1::placeholder,
+.color2::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+.color1 {
+  margin-left: 0;
+}
+
+/* ── Button ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 40px;
+  height: 52px;
+  width: 200px;
+  border: 2px solid #d1b561;
+  color: #d1b561;
+  border-radius: 30px;
+  background-color: transparent;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.btn:hover {
+  background-color: #d1b561;
+  color: #0a0a0a;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(209, 181, 97, 0.3);
+}
+
+/* ── Modal ── */
+.background {
+  width: 60%;
+  background: rgba(20, 20, 20, 0.95);
+  color: whitesmoke;
+  margin: auto;
+  margin-top: 10%;
+  padding: 48px 40px;
+  border-radius: 20px;
+  border: 1px solid rgba(209, 181, 97, 0.15);
+  backdrop-filter: blur(16px);
+  text-align: center;
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .section {
+    padding: 60px 0;
   }
-  .background
-{
-  width:50%;
-  background-color: rgba(0,0,0,255);
-  color:whitesmoke;
-  margin:auto;
-  margin-top: 15%;
-  padding: 20px;
-}
-.h1
-{
-    color:#d1b561;
+
+  .h1 {
+    font-size: 26px;
+  }
+
+  .card {
+    padding: 0 20px;
+  }
+
+  .top {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .background {
+    width: 88%;
+    padding: 32px 20px;
+  }
+
+  .btn {
+    width: 100%;
+    max-width: 320px;
+  }
 }

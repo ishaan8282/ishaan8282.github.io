@@ -1,42 +1,123 @@
-.color
-{
-    color: #d1b561;
-    height: 50px;
-    width:50px;
-    margin-top: 30px;
-    margin-left: 15px;
-}
-.fix{
-  position:fixed;
-  margin-left: 12px;
-}
-.color1
-{
-    color: #d1b561;
-    height: 50px;
-    width:50px;
-    margin-top: 100px;
-    margin-left: 15px;
-}
-.color3
-{
-    color: #d1b561;
-    height: 50px;
-    width:50px;
-    margin-top: 30px;
-    margin-left: 10px ;
-}
-@media (max-width: 900px) {
-    .fix{
-       margin-left: 0px;
-    }
-    .color{
-        height: 35px;
-        width:35px;
-    }
-    .color1{
-        height: 35px;
-        width:35px;
-    }
+/* ── DESKTOP: fixed vertical sidebar ── */
+.fix {
+  position: fixed;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
 }
 
+.fix::before {
+  content: '';
+  display: block;
+  width: 1.5px;
+  height: 60px;
+  background: linear-gradient(to bottom, transparent, rgba(209, 181, 97, 0.5));
+  margin-bottom: 4px;
+}
+
+.fix::after {
+  content: '';
+  display: block;
+  width: 1.5px;
+  height: 60px;
+  background: linear-gradient(to bottom, rgba(209, 181, 97, 0.5), transparent);
+  margin-top: 4px;
+}
+
+.iconLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(209, 181, 97, 0.25);
+  background: rgba(209, 181, 97, 0.05);
+  color: rgba(209, 181, 97, 0.7);
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.iconLink:hover {
+  border-color: #d1b561;
+  background: rgba(209, 181, 97, 0.15);
+  color: #d1b561;
+  transform: scale(1.15);
+  box-shadow: 0 0 16px rgba(209, 181, 97, 0.2);
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* ── MOBILE: horizontal social bar ── */
+@media (max-width: 768px) {
+  .fix {
+    position: relative;
+    left: unset;
+    top: unset;
+    transform: none;
+
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+
+    width: 100%;
+    margin-top: 70px;          /* sits just below the 70px fixed navbar */
+    padding: 20px 24px;
+    border-top: 1px solid rgba(209, 181, 97, 0.08);
+    border-bottom: 1px solid rgba(209, 181, 97, 0.08);
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(209, 181, 97, 0.04) 30%,
+      rgba(209, 181, 97, 0.04) 70%,
+      transparent 100%
+    );
+  }
+
+  /* hide the decorative vertical lines */
+  .fix::before,
+  .fix::after {
+    display: none;
+  }
+
+  /* "Find me on" label */
+  .mobileLabel {
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(209, 181, 97, 0.4);
+    margin-right: 20px;
+    flex-shrink: 0;
+  }
+
+  /* divider between icons */
+  .divider {
+    display: block;
+    width: 1px;
+    height: 24px;
+    background: rgba(209, 181, 97, 0.2);
+    margin: 0 16px;
+  }
+
+  .iconLink {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;       /* pill-ish squares on mobile */
+  }
+
+  .icon {
+    width: 22px;
+    height: 22px;
+  }
+}

@@ -1,86 +1,89 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from "./Navbar.module.css"
-import {Link } from "react-scroll";
+import { Link } from "react-scroll"
 import logo from "../files/IshanMehta_logo.png"
 
 const Navbar = () => {
-        const onButtonClick = () => {
-                // using Java Script method to get PDF file
-                fetch('Ishan_Mehta_Resume.pdf').then(response => {
-                    response.blob().then(blob => {
-                        // Creating new object of PDF file
-                        const fileURL = window.URL.createObjectURL(blob);
-                        // Setting various property values
-                        let alink = document.createElement('a');
-                        alink.href = fileURL;
-                        alink.download = 'Ishan_Mehta_Resume.pdf';
-                        alink.click();
-                    })
-                })
-            } 
+  const [menuOpen, setMenuOpen] = useState(false)
+
+  const onButtonClick = () => {
+    fetch('Ishan_Mehta_Resume.pdf').then(response => {
+      response.blob().then(blob => {
+        const fileURL = window.URL.createObjectURL(blob)
+        let alink = document.createElement('a')
+        alink.href = fileURL
+        alink.download = 'Ishan_Mehta_Resume.pdf'
+        alink.click()
+      })
+    })
+  }
+
+  const closeMenu = () => setMenuOpen(false)
+
+  const navLinks = [
+    { to: "intro",   label: "About"   },
+    { to: "skills",  label: "Skills"  },
+    { to: "project", label: "Project" },
+    { to: "contact", label: "Contact" },
+  ]
+
+  const scrollProps = {
+    hashSpy: true,
+    spy: true,
+    smooth: true,
+    delay: 100,
+    duration: 500,
+  }
+
   return (
-    <div className={styled.main}>
-        
- <div className={styled.flex}>
+    <nav className={styled.main}>
+      <div className={styled.flex}>
 
- <div className={styled.left}>
-      <Link to="Home" hashSpy={true}
-              spy={true}
-              smooth={true}
-              delay={100}
-              duration={500}
-              className={styled.left}>
+        {/* Logo */}
+        <Link to="Home" {...scrollProps} className={styled.logoWrapper}>
+          <img className={styled.logo} src={logo} alt="Ishan Mehta logo" />
+        </Link>
 
-                <img className={styled.logo} src={logo}></img>
+        {/* Desktop nav */}
+        <ul className={styled.navLinks}>
+          {navLinks.map(({ to, label }) => (
+            <li key={to}>
+              <Link to={to} {...scrollProps} className={styled.navItem}>
+                {label}
               </Link>
+            </li>
+          ))}
+          <li>
+            <button className={styled.resumeBtn} onClick={onButtonClick}>
+              <span>Resume</span>
+            </button>
+          </li>
+        </ul>
+
+        {/* Hamburger */}
+        <div
+          className={`${styled.hamburger} ${menuOpen ? styled.open : ''}`}
+          onClick={() => setMenuOpen(prev => !prev)}
+          aria-label="Toggle menu"
+        >
+          <span /><span /><span />
+        </div>
       </div>
-      
-      <div className={styled.left}>
-      <Link to="intro" hashSpy={true}
-              spy={true}
-              smooth={true}
-              delay={100}
-              duration={500}
-              className={styled.left}>About</Link>
-      </div>
-      <div className={styled.left}>
-      <Link to="skills" hashSpy={true}
-              spy={true}
-              smooth={true}
-              delay={100}
-              duration={500}
-              className={styled.left}>Skills</Link>
-      </div>
-      <div className={styled.left}>
-      <Link to="project" hashSpy={true}
-              spy={true}
-              smooth={true}
-              delay={100}
-              duration={500}
-              className={styled.left}>Project</Link>
-      </div>
-      <div className={styled.left}>
-     <Link to="contact" hashSpy={true}
-              spy={true}
-              smooth={true}
-              delay={100}
-              duration={500}
-              className={styled.left}>Contact</Link>
-      </div>
-      <div className={styled.left}>
-      <Link to="resume" hashSpy={true}
-              spy={true}
-              smooth={true}
-              delay={100}
-              duration={500}
-              onClick={onButtonClick}
-              className={styled.left}>
-               Resume
-                </Link>
-      </div>
-     
-    </div>
-    </div>
+
+      {/* Mobile drawer */}
+      {menuOpen && (
+        <div className={styled.mobileMenu}>
+          {navLinks.map(({ to, label }) => (
+            <Link key={to} to={to} {...scrollProps} className={styled.navItem} onClick={closeMenu}>
+              {label}
+            </Link>
+          ))}
+          <button className={styled.resumeBtn} onClick={() => { onButtonClick(); closeMenu() }}>
+            <span>Resume</span>
+          </button>
+        </div>
+      )}
+    </nav>
   )
 }
 
