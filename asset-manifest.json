@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.261e0744.css",
-    "main.js": "/static/js/main.adafd5ac.js",
+    "main.css": "/static/css/main.aa320a5d.css",
+    "main.js": "/static/js/main.209d84a6.js",
     "static/js/787.1ed0c42c.chunk.js": "/static/js/787.1ed0c42c.chunk.js",
     "static/media/Appletv.jpg": "/static/media/Appletv.66c3072ae57b9f59ab4f.jpg",
     "static/media/apollo_Banner.jpg": "/static/media/apollo_Banner.ef4a7fd735365d1520e7.jpg",
@@ -10,12 +10,12 @@
     "static/media/ProfilePic.jpg": "/static/media/ProfilePic.d83f5de9070904ac110b.jpg",
     "static/media/IshanMehta_logo.png": "/static/media/IshanMehta_logo.421db50af1a96329d7a6.png",
     "index.html": "/index.html",
-    "main.261e0744.css.map": "/static/css/main.261e0744.css.map",
-    "main.adafd5ac.js.map": "/static/js/main.adafd5ac.js.map",
+    "main.aa320a5d.css.map": "/static/css/main.aa320a5d.css.map",
+    "main.209d84a6.js.map": "/static/js/main.209d84a6.js.map",
     "787.1ed0c42c.chunk.js.map": "/static/js/787.1ed0c42c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.261e0744.css",
-    "static/js/main.adafd5ac.js"
+    "static/css/main.aa320a5d.css",
+    "static/js/main.209d84a6.js"
   ]
 }
