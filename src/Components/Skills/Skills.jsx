@@ -1,25 +1,25 @@
 import React from 'react'
 import styled from "./Skills.module.css"
 import { AiFillGithub } from "react-icons/ai"
-import { FaReact } from "react-icons/fa"
+import { FaReact, FaVuejs } from "react-icons/fa"
 import { SiRedux, SiMysql, SiJavascript, SiTailwindcss, SiBootstrap } from "react-icons/si"
 import { AiOutlineHtml5 } from "react-icons/ai"
 import { FaCss3Alt } from "react-icons/fa"
-import { DiNodejs, DiMongodb, DiAws } from "react-icons/di"
+import { DiNodejs, DiMongodb, DiAws, DiLaravel } from "react-icons/di"
 
 const skills = [
-  { icon: FaReact,         label: "React"      },
-  { icon: SiRedux,         label: "Redux"      },
-  { icon: AiOutlineHtml5,  label: "HTML"       },
-  { icon: FaCss3Alt,       label: "CSS"        },
-  { icon: DiNodejs,        label: "Node.js"    },
-  { icon: DiMongodb,       label: "MongoDB"    },
-  { icon: SiMysql,         label: "MySQL"      },
-  { icon: AiFillGithub,    label: "GitHub"     },
-  { icon: SiJavascript,    label: "JavaScript" },
-  { icon: SiTailwindcss,   label: "Tailwind"   },
-  { icon: DiAws,           label: "AWS"        },
-  { icon: SiBootstrap,     label: "Bootstrap"  },
+    { icon: FaVuejs,         label: "Vue.js"     },
+    { icon: DiLaravel,       label: "Laravel"    },
+    { icon: FaReact,         label: "React"      },
+    { icon: AiOutlineHtml5,  label: "HTML"       },
+    { icon: FaCss3Alt,       label: "CSS"        },
+    { icon: SiMysql,         label: "MySQL"      },
+    { icon: AiFillGithub,    label: "GitHub"     },
+    { icon: SiJavascript,    label: "JavaScript" },
+    { icon: SiTailwindcss,   label: "Tailwind"   },
+    { icon: SiBootstrap,     label: "Bootstrap"  },
+    { icon: DiAws,           label: "AWS"        },
+    { icon: DiNodejs,        label: "Node.js"    },
 ]
 
 const Skills = () => {
