@@ -59,13 +59,16 @@ const projects = [
   },
 ];
 
+const startYear = 2023;
+const yearsExperience = new Date().getFullYear() - startYear;
+
 const experience = [
   {
-    period: "2022 - Present",
+    period: "2023 - Present",
     role: "Full-Stack Web Developer",
     company: "TechSprinters",
     summary:
-      "4 years building production web applications across Laravel, Vue.js, PHP, React, MySQL, and modern dashboard workflows.",
+      `${yearsExperience}+ years building production web applications across Laravel, Vue.js, PHP, React, MySQL, and modern dashboard workflows.`,
     highlights: [
       "Built and improved employer, school management, reporting, and role-based modules.",
       "Delivered backend APIs, database work, and responsive UI features end-to-end.",
@@ -213,8 +216,8 @@ function Nav() {
   const links = ["about", "experience", "skills", "projects", "resume", "contact"];
 
   return (
-    <header className="fixed left-0 right-0 top-0 z-40 border-b border-white/10 bg-ink/55 backdrop-blur-xl">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-8">
+    <header className="fixed top-0 left-0 right-0 z-40 border-b border-white/10 bg-ink/55 backdrop-blur-xl">
+      <nav className="flex items-center justify-between px-5 py-4 mx-auto max-w-7xl md:px-8">
         <a href="#hero" className="text-sm font-black uppercase tracking-[0.32em] text-white">
           Ishan
         </a>
@@ -263,13 +266,13 @@ function HeroSkillOrbit() {
 }
 
 function Hero() {
-  const name = "Ishan".split("");
+  const name = "Ishan Mehta".split("");
 
   return (
-    <section id="hero" className="relative flex min-h-screen items-center overflow-hidden px-5 pt-24 md:px-8">
+    <section id="hero" className="relative flex items-center min-h-screen px-5 pt-24 overflow-hidden md:px-8">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(58,232,255,0.18),transparent_30%),radial-gradient(circle_at_80%_20%,rgba(139,92,246,0.18),transparent_32%),linear-gradient(135deg,#05060a_0%,#0d1020_55%,#05060a_100%)]" />
       <div className="absolute inset-0 opacity-25 grid-noise" />
-      <div className="hero-orb pointer-events-none absolute">
+      <div className="absolute pointer-events-none hero-orb">
         <Canvas camera={{ position: [0, 0, 4.5], fov: 45 }}>
           <ambientLight intensity={0.7} />
           <ParticleSphere />
@@ -278,20 +281,20 @@ function Hero() {
       <div className="relative z-10 mx-auto grid w-full max-w-7xl gap-8 md:grid-cols-[0.86fr_1.14fr] md:items-center">
         <div className="max-w-3xl">
           <p className="hero-eyebrow mb-5 text-xs font-bold uppercase tracking-[0.45em] text-electric">Laravel / Vue.js / PHP</p>
-          <h1 className="hero-title text-[clamp(4rem,10vw,8.4rem)] font-black leading-[0.86] text-white" aria-label="Ishan">
+          <h3 className="hero-title whitespace-nowrap text-[clamp(2.5rem,7vw,3rem)] font-black leading-[0.86] text-white" aria-label="Ishan Mehta">
             {name.map((letter, index) => (
-              <span key={`${letter}-${index}`} className="hero-letter" aria-hidden="true">
-                {letter}
+              <span key={`${letter}-${index}`} className="hero-letter inline-block" aria-hidden="true">
+                {letter === " " ? "\u00A0" : letter}
               </span>
             ))}
-          </h1>
-          <p className="hero-subtitle mt-7 max-w-2xl text-2xl font-semibold text-slate-100 md:text-4xl">Full Stack Developer</p>
-          <p className="hero-copy mt-6 max-w-xl text-base leading-8 text-slate-400 md:text-lg">
+          </h3>
+          <p className="max-w-2xl text-2xl font-semibold hero-subtitle mt-7 text-slate-100 md:text-4xl">Full Stack Developer</p>
+          <p className="max-w-xl mt-6 text-base leading-8 hero-copy text-slate-400 md:text-lg">
             I build production-ready web apps.
             <br />
             Laravel, Vue.js, PHP, MySQL, React.
           </p>
-          <div className="hero-actions mt-9 flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-4 hero-actions mt-9">
             <a href="#projects" className="rounded-full bg-electric px-7 py-4 text-sm font-black uppercase tracking-[0.18em] text-ink shadow-glow transition hover:bg-signal">
               View Work
             </a>
@@ -302,8 +305,8 @@ function Hero() {
         </div>
         <HeroSkillOrbit />
       </div>
-      <div className="absolute bottom-8 left-1/2 z-10 h-16 w-px overflow-hidden bg-white/15">
-        <span className="scroll-line block h-8 w-px bg-electric" />
+      <div className="absolute z-10 w-px h-16 overflow-hidden bottom-8 left-1/2 bg-white/15">
+        <span className="block w-px h-8 scroll-line bg-electric" />
       </div>
     </section>
   );
@@ -311,7 +314,7 @@ function Hero() {
 
 function About() {
   return (
-    <section id="about" className="relative overflow-hidden px-5 py-28 md:px-8">
+    <section id="about" className="relative px-5 overflow-hidden py-28 md:px-8">
       <div className="absolute inset-0 opacity-70">
         <Canvas camera={{ position: [0, 0, 5], fov: 48 }}>
           <ambientLight intensity={0.6} />
@@ -323,17 +326,17 @@ function About() {
       <div className="relative z-10 mx-auto grid max-w-7xl gap-10 md:grid-cols-[0.95fr_1.05fr] md:items-center">
         <div className="reveal about-frame relative aspect-[4/5] max-w-md overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.04] p-3 shadow-2xl">
           <img src={profilePhoto} alt="Ishan profile" className="h-full w-full rounded-[1.4rem] object-cover grayscale transition duration-700 hover:grayscale-0" />
-          <div className="absolute inset-x-8 bottom-8 rounded-2xl border border-white/10 bg-ink/75 p-4 backdrop-blur-xl">
+          <div className="absolute p-4 border inset-x-8 bottom-8 rounded-2xl border-white/10 bg-ink/75 backdrop-blur-xl">
             <p className="text-xs font-bold uppercase tracking-[0.28em] text-electric">Available for builds</p>
           </div>
         </div>
         <div className="reveal">
           <p className="section-kicker">About</p>
-          <h2 className="section-title">I turn product ideas into polished full-stack experiences.</h2>
-          <p className="mt-7 max-w-2xl text-lg leading-9 text-slate-300">
+          <h3 className="section-title">I turn product ideas into polished full-stack experiences.</h3>
+          <p className="max-w-2xl text-lg leading-9 mt-7 text-slate-300">
             I am Ishan, a Full Stack Developer focused on Laravel, Vue.js, PHP, MySQL, and React. I enjoy building clean backend architecture, fast interfaces, admin dashboards, and user flows that feel calm even when the logic underneath is complex.
           </p>
-          <div className="mt-8 grid gap-4 sm:grid-cols-3">
+          <div className="grid gap-4 mt-8 sm:grid-cols-3">
             {["Production UI", "Laravel APIs", "Vue + React"].map((item) => (
               <div key={item} className="rounded-2xl border border-white/10 bg-white/[0.04] p-5">
                 <span className="text-sm font-bold text-white">{item}</span>
@@ -348,26 +351,26 @@ function About() {
 
 function WorkExperience() {
   return (
-    <section id="experience" className="relative overflow-hidden px-5 py-28 md:px-8">
+    <section id="experience" className="relative px-5 overflow-hidden py-28 md:px-8">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_28%,rgba(215,255,99,0.08),transparent_26%),radial-gradient(circle_at_80%_30%,rgba(58,232,255,0.11),transparent_30%)]" />
       <div className="relative z-10 mx-auto max-w-7xl">
-        <div className="reveal mb-12 max-w-4xl">
+        <div className="max-w-4xl mb-12 reveal">
           <p className="section-kicker">Experience</p>
-          <h2 className="section-title">4 years building full-stack products.</h2>
-          <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-300">
+          <h3 className="section-title">{yearsExperience}+ years building full-stack products.</h3>
+          <p className="max-w-3xl mt-6 text-lg leading-8 text-slate-300">
             I work across backend architecture, frontend interfaces, dashboards, data flows, and product features from concept through deployment.
           </p>
         </div>
 
         <div className="grid gap-6 lg:grid-cols-[0.55fr_1.45fr]">
           <div className="reveal experience-stat rounded-[2rem] border border-white/10 bg-white/[0.04] p-8">
-            <span className="block text-[clamp(5rem,12vw,10rem)] font-black leading-none text-white">4+</span>
+            <span className="block text-[clamp(5rem,12vw,6rem)] font-black leading-none text-white">{yearsExperience}+</span>
             <span className="mt-4 block text-sm font-black uppercase tracking-[0.28em] text-electric">Years Experience</span>
           </div>
 
           {experience.map((item) => (
             <article key={item.role} className="reveal experience-card rounded-[2rem] border border-white/10 bg-[#080b14]/80 p-7 backdrop-blur-xl md:p-9">
-              <div className="flex flex-col gap-3 border-b border-white/10 pb-6 md:flex-row md:items-start md:justify-between">
+              <div className="flex flex-col gap-3 pb-6 border-b border-white/10 md:flex-row md:items-start md:justify-between">
                 <div>
                   <p className="text-sm font-black uppercase tracking-[0.24em] text-signal">{item.period}</p>
                   <h3 className="mt-3 text-3xl font-black text-white md:text-5xl">{item.role}</h3>
@@ -377,8 +380,8 @@ function WorkExperience() {
                   Laravel / Vue / PHP
                 </span>
               </div>
-              <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-300">{item.summary}</p>
-              <div className="mt-7 grid gap-3">
+              <p className="max-w-3xl mt-6 text-lg leading-8 text-slate-300">{item.summary}</p>
+              <div className="grid gap-3 mt-7">
                 {item.highlights.map((highlight) => (
                   <p key={highlight} className="experience-point rounded-2xl border border-white/10 bg-white/[0.035] px-5 py-4 text-sm leading-7 text-slate-300">
                     {highlight}
@@ -399,10 +402,10 @@ function Skills() {
   return (
     <section id="skills" className="relative px-5 py-28 md:px-8">
       <div className="mx-auto max-w-7xl">
-        <div className="reveal mb-12 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+        <div className="flex flex-col justify-between gap-4 mb-12 reveal md:flex-row md:items-end">
           <div>
             <p className="section-kicker">Skills</p>
-            <h2 className="section-title max-w-3xl">A rotating stack for modern product engineering.</h2>
+            <h3 className="max-w-3xl section-title">A rotating stack for modern product engineering.</h3>
           </div>
           <p className="max-w-sm text-sm leading-7 text-slate-400">Core tools I use to ship responsive interfaces, durable server logic, and reliable data flows.</p>
         </div>
@@ -417,7 +420,7 @@ function Skills() {
               onBlur={() => setActiveSkill(null)}
               tabIndex={0}
             >
-              <div className="absolute inset-0 opacity-60 transition duration-500 group-hover:opacity-100">
+              <div className="absolute inset-0 transition duration-500 opacity-60 group-hover:opacity-100">
                 <Canvas camera={{ position: [0, 0, 3], fov: 42 }}>
                   <ambientLight intensity={0.8} />
                   <pointLight position={[2, 2, 2]} intensity={2.5} />
@@ -425,7 +428,7 @@ function Skills() {
                   <SkillCardScene index={index} active={activeSkill === index} />
                 </Canvas>
               </div>
-              <div className="relative z-10 flex h-full flex-col justify-between">
+              <div className="relative z-10 flex flex-col justify-between h-full">
                 <div className={`flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${tone} text-2xl text-ink`}>
                   <Icon />
                 </div>
@@ -446,16 +449,16 @@ function Projects() {
   return (
     <section id="projects" className="px-5 py-28 md:px-8">
       <div className="mx-auto max-w-7xl">
-        <div className="reveal mb-12">
+        <div className="mb-12 reveal">
           <p className="section-kicker">Projects</p>
-          <h2 className="section-title max-w-4xl">Interactive builds with real product bones.</h2>
+          <h3 className="max-w-4xl section-title">Interactive builds with real product bones.</h3>
         </div>
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
           {projects.map((project) => (
             <article key={project.title} className="reveal project-card h-[460px]">
               <div className="project-card-inner">
-                <div className="project-face overflow-hidden rounded-3xl border border-white/10 bg-orbit">
-                  <img src={project.image} alt={project.title} className="h-64 w-full object-cover" />
+                <div className="overflow-hidden border project-face rounded-3xl border-white/10 bg-orbit">
+                  <img src={project.image} alt={project.title} className="object-cover w-full h-64" />
                   <div className="p-6">
                     <p className="mb-3 text-xs font-bold uppercase tracking-[0.24em] text-electric">{project.stack}</p>
                     <h3 className="text-3xl font-black text-white">{project.title}</h3>
@@ -468,7 +471,7 @@ function Projects() {
                   <p className="text-xs font-bold uppercase tracking-[0.28em] text-signal">Featured Work</p>
                   <h3 className="mt-5 text-3xl font-black text-white">{project.title}</h3>
                   <p className="mt-5 leading-8 text-slate-300">{project.summary}</p>
-                  <div className="mt-8 flex flex-wrap gap-3">
+                  <div className="flex flex-wrap gap-3 mt-8">
                     <a href={project.github} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-black uppercase tracking-[0.14em] text-ink transition hover:bg-electric">
                       GitHub <FaGithub />
                     </a>
@@ -495,8 +498,8 @@ function ResumeSection() {
         <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
           <div>
             <p className="section-kicker">Resume</p>
-            <h2 className="section-title max-w-3xl">Want the compact version?</h2>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300">
+            <h3 className="max-w-3xl section-title">Want the compact version?</h3>
+            <p className="max-w-2xl mt-6 text-lg leading-8 text-slate-300">
               Download my resume for a quick overview of my full-stack experience, project work, and Laravel/Vue/PHP skill set.
             </p>
           </div>
@@ -521,11 +524,11 @@ function Contact() {
       <div className="reveal mx-auto grid max-w-7xl gap-10 rounded-[2rem] border border-white/10 bg-white/[0.04] p-6 shadow-2xl backdrop-blur-xl md:grid-cols-[0.8fr_1.2fr] md:p-10">
         <div>
           <p className="section-kicker">Contact</p>
-          <h2 className="section-title">Let’s build something sharp.</h2>
+          <h3 className="section-title">Let’s build something sharp.</h3>
           <p className="mt-6 text-lg leading-8 text-slate-300">
             Send a note about the product, dashboard, website, or full-stack feature you want to bring to life.
           </p>
-          <div className="mt-8 flex items-center gap-3 text-slate-300">
+          <div className="flex items-center gap-3 mt-8 text-slate-300">
             <FaGithub className="text-electric" />
             <span>github.com/ishaan8282</span>
           </div>
@@ -538,7 +541,7 @@ function Contact() {
         >
           <input className="field" name="name" placeholder="Name" required />
           <input className="field" name="email" type="email" placeholder="Email" required />
-          <textarea className="field min-h-36 resize-none" name="message" placeholder="Message" required />
+          <textarea className="resize-none field min-h-36" name="message" placeholder="Message" required />
           <button className="inline-flex items-center justify-center gap-3 rounded-full bg-electric px-7 py-4 text-sm font-black uppercase tracking-[0.18em] text-ink transition hover:bg-signal" type="submit">
             Send Message <BiMailSend className="text-xl" />
           </button>
@@ -620,7 +623,7 @@ function App() {
   }, []);
 
   return (
-    <div className="App min-h-screen overflow-x-hidden bg-ink text-white">
+    <div className="min-h-screen overflow-x-hidden text-white App bg-ink">
       <CustomCursor />
       <Nav />
       <main className="page-fade">
