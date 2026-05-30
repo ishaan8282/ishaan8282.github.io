@@ -1,12 +1,14 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Float, MeshDistortMaterial, PointMaterial, Points } from "@react-three/drei";
+import { PerspectiveCamera, PointMaterial, Points, View } from "@react-three/drei";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { FaDownload, FaGithub, FaLaravel, FaPhp, FaReact, FaVuejs } from "react-icons/fa";
+import { FaDownload, FaGithub, FaLaravel, FaLinkedin, FaPhp, FaReact, FaVuejs } from "react-icons/fa";
 import { SiGit, SiJavascript, SiMysql } from "react-icons/si";
 import { BiLinkExternal, BiMailSend } from "react-icons/bi";
 import "./App.css";
+import SkillCard from "./Components/Skills/SkillCard";
+import ShapeField from "./Components/ThreeScenes/ShapeField";
 import profilePhoto from "./Components/files/ProfilePic.jpg";
 import parkEase from "./Components/files/ParkEase.png";
 import appleTv from "./Components/files/Appletv.jpg";
@@ -122,75 +124,6 @@ function ParticleSphere() {
   );
 }
 
-function ShapeField() {
-  const groupRef = useRef();
-
-  useFrame(({ clock, mouse }) => {
-    if (!groupRef.current) return;
-    groupRef.current.rotation.y = clock.elapsedTime * 0.12 + mouse.x * 0.08;
-    groupRef.current.rotation.x = mouse.y * 0.08;
-  });
-
-  return (
-    <group ref={groupRef}>
-      <Float speed={1.3} rotationIntensity={0.8} floatIntensity={1.4}>
-        <mesh position={[-1.7, 0.4, 0]}>
-          <icosahedronGeometry args={[0.58, 1]} />
-          <MeshDistortMaterial color="#3ae8ff" distort={0.25} speed={2} roughness={0.18} metalness={0.55} />
-        </mesh>
-      </Float>
-      <Float speed={1.8} rotationIntensity={1.1} floatIntensity={1.1}>
-        <mesh position={[1.45, -0.15, -0.35]}>
-          <torusKnotGeometry args={[0.46, 0.14, 100, 16]} />
-          <meshStandardMaterial color="#8b5cf6" roughness={0.28} metalness={0.65} />
-        </mesh>
-      </Float>
-      <Float speed={1.15} rotationIntensity={1.4} floatIntensity={1.6}>
-        <mesh position={[0.15, 0.95, -0.55]}>
-          <octahedronGeometry args={[0.42]} />
-          <meshStandardMaterial color="#d7ff63" roughness={0.35} metalness={0.35} />
-        </mesh>
-      </Float>
-    </group>
-  );
-}
-
-function SkillCardScene({ index, active }) {
-  const meshRef = useRef();
-  const ringRef = useRef();
-
-  useFrame(({ clock }) => {
-    if (!meshRef.current) return;
-    const hoverLift = active ? 0.22 : 0;
-    meshRef.current.position.y += (hoverLift - meshRef.current.position.y) * 0.08;
-    meshRef.current.rotation.x = Math.sin(clock.elapsedTime + index) * 0.18 + (active ? 0.25 : 0);
-    meshRef.current.rotation.y = clock.elapsedTime * (active ? 0.95 : 0.48) + index;
-    meshRef.current.scale.x += ((active ? 1.18 : 1) - meshRef.current.scale.x) * 0.08;
-    meshRef.current.scale.y += ((active ? 1.18 : 1) - meshRef.current.scale.y) * 0.08;
-    meshRef.current.scale.z += ((active ? 1.18 : 1) - meshRef.current.scale.z) * 0.08;
-
-    if (ringRef.current) {
-      ringRef.current.rotation.z = -clock.elapsedTime * (active ? 1.1 : 0.45);
-      ringRef.current.scale.setScalar(active ? 1.12 : 0.92);
-    }
-  });
-
-  return (
-    <group>
-      <Float speed={1.4} rotationIntensity={0.18} floatIntensity={0.35}>
-        <mesh ref={meshRef}>
-          <boxGeometry args={[1.6, 1.04, 0.12]} />
-          <meshStandardMaterial color={index % 2 ? "#8b5cf6" : "#3ae8ff"} roughness={0.16} metalness={0.78} />
-        </mesh>
-      </Float>
-      <mesh ref={ringRef} rotation={[1.25, 0, 0]}>
-        <torusGeometry args={[0.92, 0.012, 10, 96]} />
-        <meshBasicMaterial color={active ? "#d7ff63" : "#3ae8ff"} transparent opacity={active ? 0.72 : 0.28} />
-      </mesh>
-    </group>
-  );
-}
-
 function CustomCursor() {
   const dotRef = useRef();
   const haloRef = useRef();
@@ -212,8 +145,47 @@ function CustomCursor() {
   );
 }
 
+function Loader({ onComplete }) {
+  const barRef = useRef();
+  const containerRef = useRef();
+
+  useEffect(() => {
+    const tl = gsap.timeline({
+      onComplete: () => {
+        gsap.to(containerRef.current, { opacity: 0, duration: 0.5, onComplete });
+      }
+    });
+
+    tl.to(barRef.current, { width: "100%", duration: 1.2, ease: "power3.inOut" });
+  }, [onComplete]);
+
+  return (
+    <div ref={containerRef} className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-ink">
+      <p className="mb-4 text-xs font-bold uppercase tracking-[0.3em] text-electric">Loading...</p>
+      <div className="w-48 h-1 overflow-hidden rounded-full bg-white/10">
+        <div ref={barRef} className="w-0 h-full bg-electric" />
+      </div>
+    </div>
+  );
+}
+
 function Nav() {
   const links = ["about", "experience", "skills", "projects", "resume", "contact"];
+  const [activeSection, setActiveSection] = useState("");
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    }, { rootMargin: "-40% 0px -60% 0px" });
+
+    const sections = document.querySelectorAll("section");
+    sections.forEach(sec => observer.observe(sec));
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-40 border-b border-white/10 bg-ink/55 backdrop-blur-xl">
@@ -223,7 +195,7 @@ function Nav() {
         </a>
         <div className="hidden items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] p-1 md:flex">
           {links.map((link) => (
-            <a key={link} href={`#${link}`} className="rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-slate-300 transition hover:bg-white/10 hover:text-white">
+            <a key={link} href={`#${link}`} className={`rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] transition hover:bg-white/10 hover:text-white ${activeSection === link ? 'bg-white/15 text-white' : 'text-slate-300'}`}>
               {link}
             </a>
           ))}
@@ -272,18 +244,16 @@ function Hero() {
     <section id="hero" className="relative flex items-center min-h-screen px-5 pt-24 overflow-hidden md:px-8">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(58,232,255,0.18),transparent_30%),radial-gradient(circle_at_80%_20%,rgba(139,92,246,0.18),transparent_32%),linear-gradient(135deg,#05060a_0%,#0d1020_55%,#05060a_100%)]" />
       <div className="absolute inset-0 opacity-25 grid-noise" />
-      <div className="absolute pointer-events-none hero-orb">
-        <Canvas camera={{ position: [0, 0, 4.5], fov: 45 }}>
-          <ambientLight intensity={0.7} />
-          <ParticleSphere />
-        </Canvas>
-      </div>
+      <View className="absolute pointer-events-none hero-orb">
+        <PerspectiveCamera makeDefault position={[0, 0, 4.5]} fov={45} />
+        <ambientLight intensity={0.7} />
+        <ParticleSphere />
+      </View>
       <div className="relative z-10 mx-auto grid w-full max-w-7xl gap-8 md:grid-cols-[0.86fr_1.14fr] md:items-center">
         <div className="max-w-3xl">
-          <p className="hero-eyebrow mb-5 text-xs font-bold uppercase tracking-[0.45em] text-electric">Laravel / Vue.js / PHP</p>
           <h3 className="hero-title whitespace-nowrap text-[clamp(2.5rem,7vw,3rem)] font-black leading-[0.86] text-white" aria-label="Ishan Mehta">
             {name.map((letter, index) => (
-              <span key={`${letter}-${index}`} className="hero-letter inline-block" aria-hidden="true">
+              <span key={`${letter}-${index}`} className="inline-block hero-letter" aria-hidden="true">
                 {letter === " " ? "\u00A0" : letter}
               </span>
             ))}
@@ -315,15 +285,14 @@ function Hero() {
 function About() {
   return (
     <section id="about" className="relative px-5 overflow-hidden py-28 md:px-8">
-      <div className="absolute inset-0 opacity-70">
-        <Canvas camera={{ position: [0, 0, 5], fov: 48 }}>
-          <ambientLight intensity={0.6} />
-          <pointLight position={[3, 3, 4]} intensity={3} color="#3ae8ff" />
-          <pointLight position={[-3, -2, 3]} intensity={2} color="#8b5cf6" />
-          <ShapeField />
-        </Canvas>
-      </div>
-      <div className="relative z-10 mx-auto grid max-w-7xl gap-10 md:grid-cols-[0.95fr_1.05fr] md:items-center">
+      <View className="absolute inset-0 z-0 pointer-events-none about-shape-view opacity-45">
+        <PerspectiveCamera makeDefault position={[0, 0, 5]} fov={48} />
+        <ambientLight intensity={0.6} />
+        <pointLight position={[3, 3, 4]} intensity={3} color="#3ae8ff" />
+        <pointLight position={[-3, -2, 3]} intensity={2} color="#8b5cf6" />
+        <ShapeField />
+      </View>
+      <div className="relative z-20 mx-auto grid max-w-7xl gap-10 md:grid-cols-[0.95fr_1.05fr] md:items-center">
         <div className="reveal about-frame relative aspect-[4/5] max-w-md overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.04] p-3 shadow-2xl">
           <img src={profilePhoto} alt="Ishan profile" className="h-full w-full rounded-[1.4rem] object-cover grayscale transition duration-700 hover:grayscale-0" />
           <div className="absolute p-4 border inset-x-8 bottom-8 rounded-2xl border-white/10 bg-ink/75 backdrop-blur-xl">
@@ -332,9 +301,9 @@ function About() {
         </div>
         <div className="reveal">
           <p className="section-kicker">About</p>
-          <h3 className="section-title">I turn product ideas into polished full-stack experiences.</h3>
+          <h6 className="section-title">I turn product ideas into polished full-stack experiences.</h6>
           <p className="max-w-2xl text-lg leading-9 mt-7 text-slate-300">
-            I am Ishan, a Full Stack Developer focused on Laravel, Vue.js, PHP, MySQL, and React. I enjoy building clean backend architecture, fast interfaces, admin dashboards, and user flows that feel calm even when the logic underneath is complex.
+            I am Ishan Mehta, a Full Stack Developer focused on Laravel, Vue.js, PHP, MySQL, and React. I enjoy building clean backend architecture, fast interfaces, admin dashboards, and user flows that feel calm even when the logic underneath is complex.
           </p>
           <div className="grid gap-4 mt-8 sm:grid-cols-3">
             {["Production UI", "Laravel APIs", "Vue + React"].map((item) => (
@@ -354,10 +323,10 @@ function WorkExperience() {
     <section id="experience" className="relative px-5 overflow-hidden py-28 md:px-8">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_28%,rgba(215,255,99,0.08),transparent_26%),radial-gradient(circle_at_80%_30%,rgba(58,232,255,0.11),transparent_30%)]" />
       <div className="relative z-10 mx-auto max-w-7xl">
-        <div className="max-w-4xl mb-12 reveal">
+        <div className="mb-12 reveal">
           <p className="section-kicker">Experience</p>
           <h3 className="section-title">{yearsExperience}+ years building full-stack products.</h3>
-          <p className="max-w-3xl mt-6 text-lg leading-8 text-slate-300">
+          <p className="mt-6 text-lg leading-8 text-slate-300">
             I work across backend architecture, frontend interfaces, dashboards, data flows, and product features from concept through deployment.
           </p>
         </div>
@@ -376,11 +345,8 @@ function WorkExperience() {
                   <h3 className="mt-3 text-3xl font-black text-white md:text-5xl">{item.role}</h3>
                   <p className="mt-2 text-lg font-semibold text-electric">{item.company}</p>
                 </div>
-                <span className="rounded-full border border-electric/30 px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-slate-200">
-                  Laravel / Vue / PHP
-                </span>
               </div>
-              <p className="max-w-3xl mt-6 text-lg leading-8 text-slate-300">{item.summary}</p>
+              <p className="mt-6 text-lg leading-8 text-slate-300">{item.summary}</p>
               <div className="grid gap-3 mt-7">
                 {item.highlights.map((highlight) => (
                   <p key={highlight} className="experience-point rounded-2xl border border-white/10 bg-white/[0.035] px-5 py-4 text-sm leading-7 text-slate-300">
@@ -405,39 +371,20 @@ function Skills() {
         <div className="flex flex-col justify-between gap-4 mb-12 reveal md:flex-row md:items-end">
           <div>
             <p className="section-kicker">Skills</p>
-            <h3 className="max-w-3xl section-title">A rotating stack for modern product engineering.</h3>
+            <h3 className="section-title">A rotating stack for modern product engineering.</h3>
           </div>
           <p className="max-w-sm text-sm leading-7 text-slate-400">Core tools I use to ship responsive interfaces, durable server logic, and reliable data flows.</p>
         </div>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {skills.map(({ name, icon: Icon, tone }, index) => (
-            <article
-              key={name}
-              className="reveal skill-card group relative min-h-[260px] overflow-hidden rounded-3xl border border-white/10 bg-white/[0.035] p-5"
-              onMouseEnter={() => setActiveSkill(index)}
-              onMouseLeave={() => setActiveSkill(null)}
-              onFocus={() => setActiveSkill(index)}
-              onBlur={() => setActiveSkill(null)}
-              tabIndex={0}
-            >
-              <div className="absolute inset-0 transition duration-500 opacity-60 group-hover:opacity-100">
-                <Canvas camera={{ position: [0, 0, 3], fov: 42 }}>
-                  <ambientLight intensity={0.8} />
-                  <pointLight position={[2, 2, 2]} intensity={2.5} />
-                  <pointLight position={[-2, -1, 2]} intensity={1.2} color="#8b5cf6" />
-                  <SkillCardScene index={index} active={activeSkill === index} />
-                </Canvas>
-              </div>
-              <div className="relative z-10 flex flex-col justify-between h-full">
-                <div className={`flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${tone} text-2xl text-ink`}>
-                  <Icon />
-                </div>
-                <div>
-                  <p className="mb-3 text-xs font-black uppercase tracking-[0.22em] text-slate-400">Core Skill</p>
-                  <h3 className="text-2xl font-black text-white">{name}</h3>
-                </div>
-              </div>
-            </article>
+          {skills.map((skill, index) => (
+            <SkillCard
+              key={skill.name}
+              skill={skill}
+              index={index}
+              active={activeSkill === index}
+              onActivate={() => setActiveSkill(index)}
+              onDeactivate={() => setActiveSkill(null)}
+            />
           ))}
         </div>
       </div>
@@ -451,7 +398,7 @@ function Projects() {
       <div className="mx-auto max-w-7xl">
         <div className="mb-12 reveal">
           <p className="section-kicker">Projects</p>
-          <h3 className="max-w-4xl section-title">Interactive builds with real product bones.</h3>
+          <h3 className="section-title">Interactive builds with real product bones.</h3>
         </div>
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
           {projects.map((project) => (
@@ -498,7 +445,7 @@ function ResumeSection() {
         <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
           <div>
             <p className="section-kicker">Resume</p>
-            <h3 className="max-w-3xl section-title">Want the compact version?</h3>
+            <h3 className="section-title">Want the compact version?</h3>
             <p className="max-w-2xl mt-6 text-lg leading-8 text-slate-300">
               Download my resume for a quick overview of my full-stack experience, project work, and Laravel/Vue/PHP skill set.
             </p>
@@ -552,8 +499,32 @@ function Contact() {
   );
 }
 
+function Footer() {
+  return (
+    <footer className="px-5 py-10 border-t border-white/10 bg-ink md:px-8">
+      <div className="flex flex-col items-center justify-between gap-6 mx-auto max-w-7xl md:flex-row">
+        <p className="text-sm font-semibold tracking-wide text-slate-400">
+          © {new Date().getFullYear()} Ishan Mehta. All rights reserved.
+        </p>
+        <div className="flex items-center gap-5 text-xl text-slate-400">
+          <a href="https://github.com/ishaan8282" target="_blank" rel="noreferrer" className="transition hover:text-electric">
+            <FaGithub />
+          </a>
+          <a href="https://linkedin.com/in/ishaan8282" target="_blank" rel="noreferrer" className="transition hover:text-electric">
+            <FaLinkedin />
+          </a>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
 function App() {
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
+    if (loading) return;
+
     const heroTimeline = gsap.timeline({ defaults: { ease: "power4.out" } });
     heroTimeline
       .fromTo(".hero-eyebrow", { y: 22, opacity: 0 }, { y: 0, opacity: 1, duration: 0.75 })
@@ -620,13 +591,14 @@ function App() {
       heroTimeline.kill();
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
-  }, []);
+  }, [loading]);
 
   return (
-    <div className="min-h-screen overflow-x-hidden text-white App bg-ink">
+    <div className="relative min-h-screen overflow-x-hidden text-white App bg-ink" id="app-container">
+      {loading && <Loader onComplete={() => setLoading(false)} />}
       <CustomCursor />
       <Nav />
-      <main className="page-fade">
+      <main className="page-fade" style={{ opacity: loading ? 0 : 1, transition: 'opacity 0.3s ease-out' }}>
         <Hero />
         <About />
         <WorkExperience />
@@ -635,6 +607,14 @@ function App() {
         <ResumeSection />
         <Contact />
       </main>
+      <Footer />
+      <Canvas
+        className="pointer-events-none"
+        style={{ position: "fixed", top: 0, left: 0, width: "100vw", height: "100vh", zIndex: 0 }}
+        eventSource={document.getElementById("root")}
+      >
+        <View.Port />
+      </Canvas>
     </div>
   );
 }

@@ -211,7 +211,7 @@
 .section-title {
   margin-top: 1rem;
   color: #fff;
-  font-size: clamp(2rem, 4.35vw, 4.4rem);
+  font-size: clamp(2rem, 4.35vw, 3rem);
   font-weight: 950;
   letter-spacing: 0;
   line-height: 1;
@@ -253,6 +253,11 @@
   background: linear-gradient(135deg, rgba(58, 232, 255, 0.45), transparent 38%, rgba(139, 92, 246, 0.5));
   opacity: 0.38;
   pointer-events: none;
+}
+
+.about-shape-view {
+  filter: blur(0.2px);
+  mix-blend-mode: screen;
 }
 
 .experience-card,
@@ -308,12 +313,33 @@
   transition: transform 450ms ease, border-color 450ms ease, background 450ms ease, box-shadow 450ms ease;
 }
 
+.skill-scene-view {
+  z-index: 0;
+  pointer-events: none;
+  transform: translate3d(12%, -2%, 0);
+}
+
+.skill-card-content {
+  min-height: 13.75rem;
+}
+
+.skill-icon-orb {
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.28), inset 0 1px 14px rgba(255, 255, 255, 0.26);
+  transition: transform 350ms ease, box-shadow 350ms ease;
+}
+
 .skill-card:hover,
 .skill-card:focus-visible {
   border-color: rgba(58, 232, 255, 0.4);
   background: rgba(255, 255, 255, 0.065);
   box-shadow: 0 30px 90px rgba(58, 232, 255, 0.12);
   transform: translateY(-10px) rotateX(6deg) rotateY(-8deg);
+}
+
+.skill-card:hover .skill-icon-orb,
+.skill-card:focus-visible .skill-icon-orb {
+  box-shadow: 0 20px 48px rgba(58, 232, 255, 0.18), inset 0 1px 16px rgba(255, 255, 255, 0.32);
+  transform: translate3d(0, -3px, 36px) scale(1.06);
 }
 
 .project-card {
@@ -424,6 +450,16 @@
   .cursor-dot,
   .cursor-halo {
     display: none;
+  }
+
+  .about-shape-view {
+    opacity: 0.22;
+    transform: translateX(18%);
+  }
+
+  .skill-scene-view {
+    opacity: 0.32;
+    transform: translate3d(22%, -4%, 0) scale(0.88);
   }
 
   .section-title {
