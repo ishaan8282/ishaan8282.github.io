@@ -3,7 +3,7 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { PerspectiveCamera, PointMaterial, Points, View } from "@react-three/drei";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { FaDownload, FaGithub, FaLaravel, FaLinkedin, FaPhp, FaReact, FaVuejs } from "react-icons/fa";
+import { FaBars, FaDownload, FaGithub, FaLaravel, FaLinkedin, FaPhp, FaReact, FaTimes, FaVuejs } from "react-icons/fa";
 import { SiGit, SiJavascript, SiMysql } from "react-icons/si";
 import { BiLinkExternal, BiMailSend } from "react-icons/bi";
 import "./App.css";
@@ -172,6 +172,7 @@ function Loader({ onComplete }) {
 function Nav() {
   const links = ["about", "experience", "skills", "projects", "resume", "contact"];
   const [activeSection, setActiveSection] = useState("");
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -187,8 +188,33 @@ function Nav() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    if (!menuOpen) return undefined;
+
+    const closeOnEscape = (event) => {
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+      }
+    };
+    const closeOnDesktop = () => {
+      if (window.innerWidth >= 768) {
+        setMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("keydown", closeOnEscape);
+    window.addEventListener("resize", closeOnDesktop);
+
+    return () => {
+      document.removeEventListener("keydown", closeOnEscape);
+      window.removeEventListener("resize", closeOnDesktop);
+    };
+  }, [menuOpen]);
+
+  const closeMenu = () => setMenuOpen(false);
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-40 border-b border-white/10 bg-ink/55 backdrop-blur-xl">
+    <header className="fixed top-0 left-0 right-0 z-40 border-b border-white/10 bg-ink/80 backdrop-blur-xl">
       <nav className="flex items-center justify-between px-5 py-4 mx-auto max-w-7xl md:px-8">
         <a href="#hero" className="text-sm font-black uppercase tracking-[0.32em] text-white">
           Ishan
@@ -203,7 +229,41 @@ function Nav() {
         <a href="#contact" className="hidden rounded-full bg-white px-5 py-2 text-xs font-black uppercase tracking-[0.16em] text-ink transition hover:bg-electric hover:text-ink sm:inline-flex">
           Hire Me
         </a>
+        <button
+          type="button"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-white transition hover:border-electric hover:text-electric md:hidden"
+          aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-expanded={menuOpen}
+          aria-controls="mobile-navigation"
+          onClick={() => setMenuOpen((open) => !open)}
+        >
+          {menuOpen ? <FaTimes aria-hidden="true" /> : <FaBars aria-hidden="true" />}
+        </button>
       </nav>
+      <div
+        id="mobile-navigation"
+        className={`md:hidden overflow-hidden border-t border-white/10 bg-[#05060a]/95 transition-[max-height,opacity] duration-300 ${menuOpen ? "max-h-[32rem] opacity-100" : "max-h-0 opacity-0"}`}
+      >
+        <div className="mx-auto grid max-w-7xl gap-2 px-5 py-4">
+          {links.map((link) => (
+            <a
+              key={link}
+              href={`#${link}`}
+              onClick={closeMenu}
+              className={`rounded-2xl border px-4 py-3 text-sm font-black uppercase tracking-[0.16em] transition ${activeSection === link ? "border-electric/40 bg-electric/15 text-electric" : "border-white/10 bg-white/[0.035] text-slate-200 hover:border-white/20 hover:bg-white/[0.06]"}`}
+            >
+              {link}
+            </a>
+          ))}
+          <a
+            href="#contact"
+            onClick={closeMenu}
+            className="mt-2 inline-flex items-center justify-center rounded-full bg-white px-5 py-3 text-xs font-black uppercase tracking-[0.16em] text-ink transition hover:bg-electric"
+          >
+            Hire Me
+          </a>
+        </div>
+      </div>
     </header>
   );
 }
