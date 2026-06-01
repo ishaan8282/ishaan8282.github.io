@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.0b688e9c.css",
-    "main.js": "/static/js/main.988a49c8.js",
+    "main.css": "/static/css/main.44b825d0.css",
+    "main.js": "/static/js/main.ee8615e7.js",
     "static/js/27.e803769c.chunk.js": "/static/js/27.e803769c.chunk.js",
     "static/media/TCD.png": "/static/media/TCD.ccc433ad0a9089a32629.png",
     "static/media/ParkEase.png": "/static/media/ParkEase.363bc467292fd848faf0.png",
@@ -10,7 +10,7 @@
     "index.html": "/index.html"
   },
   "entrypoints": [
-    "static/css/main.0b688e9c.css",
-    "static/js/main.988a49c8.js"
+    "static/css/main.44b825d0.css",
+    "static/js/main.ee8615e7.js"
   ]
 }
